@@ -35,10 +35,10 @@ async def _process(
         transformed_data = transformer.extract_data_from_mfcr_batch_file(doc_type, raw_data)
         logger.info("Data transformation successful")
 
-        # item_ids = [await data_target.post_data(item, correlation_id) for item in transformed_data]
+        item_ids = [await data_target.post_data(item, correlation_id) for item in transformed_data]
         logger.info("Data posting successful")
 
-        return []
+        return item_ids
 
     except HTTPException as e:
         raise e

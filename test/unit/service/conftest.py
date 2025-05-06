@@ -9,6 +9,7 @@ def mock_aiohttp() -> unittest.mock.AsyncMock:
     with unittest.mock.patch("aiohttp.ClientSession") as mock_aiohttp:
         mock_aiohttp.return_value = mock_aiohttp
         mock_aiohttp.get.return_value = mock_aiohttp
+        mock_aiohttp.post.return_value = mock_aiohttp
         mock_aiohttp.__aenter__.side_effect = mock_aiohttp
 
         mock_aiohttp.status = 200

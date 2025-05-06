@@ -22,10 +22,10 @@ async def get_data(doc_type: str, year: str | None = None, month: str | None = N
     today = dt.datetime.today()
 
     url_details = path_mapping.get(doc_type)
-    year = str(year or today.year)
-    month = str(month or ("12" if year != today.year else today.month))
+    year = year or today.year
+    month = month or ("12" if year != today.year else today.month)
 
-    url = f"{CONFIG.DATA_SOURCE_URL}/{url_details[0]}/{year}_{month.zfill(2)}_Data_CSUIS_{url_details[1]}.zip"
+    url = f"{CONFIG.DATA_SOURCE_URL}/{url_details[0]}/{year}_{str(month).zfill(2)}_Data_CSUIS_{url_details[1]}.zip"
 
     async with (
         aiohttp.ClientSession() as async_session,

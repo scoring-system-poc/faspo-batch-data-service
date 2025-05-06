@@ -9,18 +9,18 @@ async def test__process(mock_data_source_service, mock_data_target_service, mock
     mock_transformer_service.extract_data_from_mfcr_batch_file.return_value = [{"id": "item1"}, {"id": "item2"}]
     mock_data_target_service.post_data.side_effect = unittest.mock.AsyncMock(side_effect=lambda x, *_: x["id"])
 
-    subject_id = "test_subject"
     doc_type = "001"
-    period = None
+    year = "1970"
+    month = "01"
     correlation_id = "test_correlation_id"
 
     from src.api.v1.mfcr import _process
-    result = await _process(subject_id, doc_type, period, correlation_id)
+    result = await _process(doc_type, year, month, correlation_id)
 
     assert result == ["item1", "item2"]
 
-    mock_data_source_service.get_data.side_effect.assert_awaited_once_with(subject_id, doc_type, period)
-    mock_transformer_service.extract_data_from_mfcr_batch_file.assert_called_once_with("test_subject", b"<response>...</response>")
+    mock_data_source_service.get_data.side_effect.assert_awaited_once_with(doc_type, year, month)
+    mock_transformer_service.extract_data_from_mfcr_batch_file.assert_called_once_with("001", b"<response>...</response>")
     mock_data_target_service.post_data.side_effect.assert_any_await({"id": "item1"}, correlation_id)
     mock_data_target_service.post_data.side_effect.assert_any_await({"id": "item2"}, correlation_id)
 
