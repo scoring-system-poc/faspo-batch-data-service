@@ -12,11 +12,24 @@ retrieves batches of financial data from the [https://monitor.statnipokladna.cz/
 
 ## Environment Variables
 
-* `DATA_SOURCE_URL`: URL of the external data source (default: `https://monitor.statnipokladna.cz/data/extrakty/csv`)
-* `DATA_TARGET_URL`: URL of the internal data target, i.e. Store Service HOST
-* `SCHEDULE_HOUR`: Hour of the day when automatic check runs (default: `0`)
-* `SCHEDULE_MINUTE`: Minute of the hour when automatic check runs (default: `0`)
-* `LOG_INFO`: Log level for info messages (default: `INFO`)
+* `APPLICATIONINSIGHTS_CONNECTION_STRING`
+  * Connection string for Azure Application Insights
+  * for local testing set to `InstrumentationKey=00000000-0000-0000-0000-000000000000` and ignore errors from `azure.monitor.opentelemetry`
+
+* `DATA_SOURCE_URL`
+  * URL of the external data source
+  * default: `https://monitor.statnipokladna.cz/data/extrakty/csv`
+* `DATA_TARGET_URL`
+  * URL of the internal data target, i.e. Store Service HOST
+* `SCHEDULE_HOUR`
+  * Hour of the day when automatic check runs 
+  * default: `0`
+* `SCHEDULE_MINUTE`
+  * Minute of the hour when automatic check runs 
+  * default: `0`
+* `LOG_INFO`
+  * Log level for info messages 
+  * default: `INFO`
 
 ## Installation (Direct)
 

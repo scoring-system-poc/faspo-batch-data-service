@@ -10,14 +10,14 @@ def setup_logging():
     """
     Set up logging configuration.
     """
-    # azure.monitor.opentelemetry.configure_azure_monitor(
-    #     logger_name="src",
-    #     instrumentation_options={
-    #         "flask": {"enabled": False},
-    #         "django": {"enabled": False},
-    #         "psycopg2": {"enabled": False},
-    #     }
-    # )
+    azure.monitor.opentelemetry.configure_azure_monitor(
+        logger_name="src",
+        instrumentation_options={
+            "flask": {"enabled": False},
+            "django": {"enabled": False},
+            "psycopg2": {"enabled": False},
+        }
+    )
 
     logging.getLogger("uvicorn.access").addFilter(
         lambda record: record.getMessage().find("/probe/") == -1
